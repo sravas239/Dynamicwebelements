@@ -1,4 +1,4 @@
-<project xmlns="https://maven.apache.org/POM/4.0.0" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+c<project xmlns="https://maven.apache.org/POM/4.0.0" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>Dynamicwebelements</groupId>
   <artifactId>Dynamicwebelements</artifactId>
@@ -26,12 +26,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!--<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-api</artifactId>
-			<version>5.10.0</version>
-			<scope>test</scope>
-		</dependency>-->
 
 
 		<dependency>
@@ -97,29 +91,42 @@
 			<artifactId>slf4j-simple</artifactId>
 			<version>2.0.7</version>
 		</dependency>
-		<dependency>
-		<groupId>org.projectlombok</groupId>
-		<artifactId>lombok</artifactId>
-		<version>1.18.30</version> <!-- Use the latest stable version -->
-		<scope>provided</scope>
-		</dependency>
-	</dependencies>
+		</dependencies>
+		
+		<build>
+    <plugins>
+        <!-- Maven Compiler Plugin -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.11.0</version>
+            <configuration>
+                <source>21</source> <!-- Java 21 -->
+                <target>21</target>
+                <annotationProcessorPaths>
+                    <path>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                        <version>1.18.30</version>
+                    </path>
+                </annotationProcessorPaths>
+            </configuration>
+        </plugin>
 
-<build>
-<plugins>
-<!-- Maven Compiler Plugin -->
-<plugin><groupId>org.apache.maven.plugins</groupId>
-<artifactId>maven-compiler-plugin</artifactId>
-<version>3.11.0</version>
-<configuration><source>21</source>
- <!-- Java 21 -->
- <target>21</target>
- <annotationProcessorPaths>
- <path><groupId>org.projectlombok</groupId>
- <artifactId>lombok</artifactId>
- <version>1.18.30</version>
- </path>
- </annotationProcessorPaths></configuration>
- </plugin></plugins>
- </build>	
+        <!-- Maven Surefire Plugin -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.2.5</version>
+            <configuration>
+                <suiteXmlFiles>
+                    <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                </suiteXmlFiles>
+                <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+	
+
 </project>
